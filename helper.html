@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>999kino</title>
+</head>
+<body>
+  <img src="img/map/map1_helper.png" style="">
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script>
+    
+    $(function() {
+      document.oncontextmenu = function() {return false;};
+      
+      var points = [];
+      
+      $('img').mousedown(function(e) {
+        if( e.button == 2 ) {
+          console.log(",{name: '"+prompt()+"', points: ["+points.join(', ')+']}');
+          points = [];
+        } else {
+          var offset = $(this).offset();
+          x = Math.floor(e.pageX - offset.left-5);
+          y = Math.floor(e.pageY - offset.top-5);
+          points.push(x, y);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
