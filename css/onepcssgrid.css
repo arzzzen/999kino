@@ -35,7 +35,7 @@
  */
 .onepcssgrid-1000, .onepcssgrid-1200 {
 	margin: 0 auto;
-	padding: 0 0 0 1%; /* THAT'S THE NAME ;) */
+	padding: 0 0 0 0%; /* THAT'S THE NAME ;) */
 }
 
 .onepcssgrid-1200 {
@@ -44,12 +44,12 @@
 
 .onepcssgrid-1000 {
 /*	max-width: 1020px;*/
-  width: 1020px;
+  width: 1000px;
 }
 
 .onerow {
 	clear: both;
-	padding: 0 10px;
+	/*padding: 0 10px;*/
 }
 
 
