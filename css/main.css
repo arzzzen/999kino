@@ -294,12 +294,12 @@ img.logo2 {
 
 .map_buttons_minus {
   float: left;
-  background: url(../img/map/map_buttons_minus.png);
+  background: url(../img/ymap/map_buttons_minus.png);
 }
 
 .map_buttons_plus {
   float: right;
-  background: url(../img/map/map_buttons_plus.png);
+  background: url(../img/ymap/map_buttons_plus.png);
 }
 
 .container {

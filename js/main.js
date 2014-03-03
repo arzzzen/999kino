@@ -112,7 +112,6 @@ var coordinates = [
 ymaps.ready(init);
 
 function init() {
-    console.log(ymaps.theme.twirl );
     // Создаем проекцию для декартовой системы координат.
     var myProjection = new ymaps.projection.Cartesian([
             // Определяем границы области отображения в декартовых координатах.
@@ -166,9 +165,9 @@ function init() {
   
     // Поставим метку по клику над картой
     myMap.events.add('mousedown', function (e) {
-      var offset = e.get('coordPosition');
-      points.push(offset);
-      console.log("["+points.join('], [')+']');
+      // var offset = e.get('coordPosition');
+      // points.push(offset);
+      // console.log("["+points.join('], [')+']');
     });
 }
 
@@ -186,23 +185,24 @@ function getPolygon(coord) {
       // Делаем полигон прозрачным для событий карты.
       interactivityModel: 'default#transparent',
       strokeWidth: 2,
-      opacity: 0.2
+      opacity: 0
   });
-  var placem = new ymaps.Placemark(coord.placem, {
-        balloonContent: '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />',
-        //iconContent: coord.title
-    }, {
+  var placem = new ymaps.Placemark(coord.placem, {},
+    {
         //preset: "twirl#yellowStretchyIcon",
         iconImageHref   : coord.placemark,
         iconImageSize   : [coord.plmSize / 1.5, 62 / 1.5],
-        iconImageOffset : [-(coord.plmSize-38) / 1.5, -62 / 1.5]
+        iconImageOffset : [-(coord.plmSize-38) / 1.5, -62 / 1.5],
+        // Заставляем балун открываться даже если в нем нет содержимого.
+        openEmptyBalloon: true,
+        balloonCloseButton: false
         //iconImageHref: 'http://api-maps.yandex.ru/2.0.35/images/f1803ced2e0fe1b1011ad5f040d02219.png'
     });
   poly.events.add('mouseenter', function(e){
     poly.options.set('opacity', '0.5');
   });
   poly.events.add('mouseleave', function(e){
-    poly.options.set('opacity', '0.2');
+    poly.options.set('opacity', '0');
   });
   poly.events.add('click', function(e){
     placem.balloon.open();
@@ -211,7 +211,10 @@ function getPolygon(coord) {
     poly.options.set('opacity', '0.5');
   });
   placem.events.add('mouseleave', function(e){
-    poly.options.set('opacity', '0.2');
+    poly.options.set('opacity', '0');
+  });
+  placem.events.add('balloonopen', function (e) {
+    placem.properties.set('balloonContent', '<img src="img/ajax-loader.gif" />');
   });
   return {'poly' : poly, 'placem' : placem};
 }
